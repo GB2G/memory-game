@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://gb2g.github.io/memory-game/",
+  "homepage": "https://gb2g.github.io/memory-game",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
