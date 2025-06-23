@@ -6,11 +6,11 @@ import './App.css'
 import {createHashRouter, RouterProvider} from "react-router-dom"
 
 import HomeScreen from './pages/HomeScreen/HomeScreen'
-import GameScreen from './pages/GameDesign/GameScreen'
+import MemoryGame from './pages/GameDesign/GameScreen'
 
 const router = createHashRouter([
   {path: '/', element: <HomeScreen />},
-  {path: '/game/:level', element: <GameScreen /> },
+  {path: '/game/:level', element: <MemoryGame /> },
   // {path:'*', element: <NotFoundPage/>}
 
 ])

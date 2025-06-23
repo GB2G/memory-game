@@ -1,0 +1,69 @@
+/* MemoryGame.css */
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.game-navbar {
+    top:0;
+    left:0;
+    position: fixed;
+    width:100%;
+    background-color: #343a40;
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.scoreboard span {
+  margin: 0 1rem;
+  font-weight: bold;
+}
+
+.game-grid {
+    margin: 10vh;
+    display: grid;
+    max-width: 20rem;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+}
+
+
+.game-grid.easy {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.game-grid.normal {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.game-grid.hard {
+  grid-template-columns: repeat(6, 12rem);
+}
+
+.matched {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+
+/* Optional styling for rank and suit */
+.rank {
+  font-size: 1.4rem;
+}
+
+.suit {
+  font-size: 2.5rem;
+  margin-top: 5px;
+}
+
+/* Modal buttons */
+.modal-footer .btn {
+  min-width: 100px;
+}

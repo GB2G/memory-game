@@ -3,24 +3,24 @@ import React from 'react';
 import { useState } from 'react';
 import { Container, Col, Button, Modal, Carousel, Card} from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import './HomeScreen.css';
-import easyModeImg from '../../assets/images/easy-mode.png';
-import normalModeImg from '../../assets/images/normal-mode.png';
-import hardModeImg from '../../assets/images/hard-mode.png';
+
+import easyModeImg from '../../../assets/images/easy-mode.png';
+import normalModeImg from '../../../assets/images/normal-mode.png';
+import hardModeImg from '../../../assets/images/hard-mode.png';
 
 function GameSelectModal(props) {
-  const buttonTexts = ["Start Easy Mode", "Start Normal Mode", "Start Hard Mode"];
-  const routes = ["/game/easy", "/game/normal", "/game/hard"];
+    const buttonTexts = ["Start Easy Mode", "Start Normal Mode", "Start Hard Mode"];
+    const routes = ["/game/easy", "/game/normal", "/game/hard"];
 
-  const {show, onHide} = props;
-  const navigate = useNavigate();
-  const [index, setIndex] = useState(0);
-  const handleSelect = (selectedIndex) => {
-    setIndex(selectedIndex);
-  };
-  const [modalShow, setModalShow] = useState(false);
+    const {show, onHide} = props;
+    const navigate = useNavigate();
+    const [index, setIndex] = useState(0);
+    const handleSelect = (selectedIndex) => {
+        setIndex(selectedIndex);
+    };
+    const [modalShow, setModalShow] = useState(false);
 
-  return (
+    return (
     <Modal {...props} size="lg" aria-labelledby="contained-modal-title-vcenter" centered dialogClassName="modal-centered"
         show={show} onHide={onHide}
     >

@@ -1,0 +1,81 @@
+.playing-card {
+  width: 150px;
+  height: 200px;
+  perspective: 1000px;
+  margin: 10px;
+  cursor: pointer;
+  display: block;
+  position: relative;
+  pointer-events: auto; /* enable clicks */
+  z-index: 1;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+  pointer-events: auto; /* allow click events on inner container */
+}
+
+.playing-card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 3rem;
+  border: 1px solid black;
+  user-select: none;
+  box-sizing: border-box;
+  pointer-events: none; /* prevent blocking click on front/back */
+}
+
+.card-front {
+  background: white;
+  color: black;
+  padding: 8px;
+}
+
+.card-front.spade,
+.card-front.club {
+  color: black;
+}
+
+.card-front.heart,
+.card-front.diamond {
+  color: red;
+}
+
+.card-back {
+  background: #2e3b55;
+  transform: rotateY(180deg);
+}
+
+.suit {
+  font-size: 3rem;
+  line-height: 1;
+  margin: auto;
+  user-select: none;
+}
+
+.playing-card:hover {
+  scale: 1.05;
+  transition: 0.3s ease;
+}
+
+.matched {
+  pointer-events: none;
+  opacity: 0.6; /* optional: visually show it's disabled */
+}
