@@ -141,7 +141,7 @@ function MemoryGame() {
 
     // Detect game over (all pairs matched)
     useEffect(() => {
-        if (matches === getPairCount() || score/10 == getPairCount()) {
+        if (matches === getPairCount()) {
         setGameOver(true);
 
         }
