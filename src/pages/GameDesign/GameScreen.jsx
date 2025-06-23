@@ -198,6 +198,7 @@ function MemoryGame() {
         setScore(0);
         setMatches(0);
         setGameOver(false);
+        setGameWon(false);
         setSeconds(0);
         setIsPreviewing(true);
     };
