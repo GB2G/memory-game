@@ -25,14 +25,15 @@ function MemoryGame() {
     };
 
     let gameData = {
-        "easy": ['easy', 2],
-        "normal": ['normal', 4],
-        "hard": ['hard', 9],
+        "easy": ['easy', 2, 20],
+        "normal": ['normal', 4, 40],
+        "hard": ['hard', 9, 100],
     };
 
     const difficulty = params.level;
 
     const data = gameData[difficulty];
+    const points = data[2];
 
     // Number of pairs based on difficulty
     const getPairCount = () => {
@@ -123,7 +124,7 @@ function MemoryGame() {
                 newCards[second].isMatched = true;
                 setCards([...newCards]);
                 setFlippedIndices([]);
-                setScore(score + 10);
+                setScore(score + points);
                 setMatches(matches + 1);
                 }, 500);
             } else {
