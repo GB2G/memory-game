@@ -4,9 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import {useParams} from 'react-router-dom';
 import PlayingCard from './Card/Card.jsx';
 import GameOverModal from './Modals/GameOverModal';
+import GameWonModal from './Modals/GameWonModal.jsx';
 import './MemoryGame.css';
 
 function MemoryGame() {
+    
     const [seconds, setSeconds] = useState(0);
     const navigate = useNavigate();
     const params = useParams();
@@ -14,6 +16,7 @@ function MemoryGame() {
     const [flippedIndices, setFlippedIndices] = useState([]);
     const [score, setScore] = useState(0);
     const [matches, setMatches] = useState(0);
+    const [gameWon, setGameWon] = useState(false);
     const [gameOver, setGameOver] = useState(false);
     const [isPreviewing, setIsPreviewing] = useState(true); // Preview mode
 
@@ -25,15 +28,18 @@ function MemoryGame() {
     };
 
     let gameData = {
-        "easy": ['easy', 2, 20],
-        "normal": ['normal', 4, 40],
-        "hard": ['hard', 9, 100],
+        "easy": ['easy', 2, 20, 5500, 5, 2],
+        "normal": ['normal', 4, 40, 6000, 6, 4],
+        "hard": ['hard', 9, 100, 10000, 10, 6],
     };
 
     const difficulty = params.level;
 
     const data = gameData[difficulty];
     const points = data[2];
+    const timeS = data[4];
+    const timeMs = data[3];
+    const mistakes = data[5];
 
     // Number of pairs based on difficulty
     const getPairCount = () => {
@@ -56,6 +62,40 @@ function MemoryGame() {
         return deck;
     };
 
+    //Lives feature
+    const [lives, setLives] = useState(mistakes);
+
+
+    //Timer to countdown preview
+    const [previewCountdown, setPreviewCountdown] = useState(timeS);
+
+    useEffect(() => {
+        if (isPreviewing) {
+            setPreviewCountdown(timeS);
+            const countdownInterval = setInterval(() => {
+            setPreviewCountdown(prev => {
+                if (prev <= 1) {
+                clearInterval(countdownInterval);
+                return 0;
+                }
+                return prev - 1;
+            });
+            }, 1000);
+
+            const previewTimer = setTimeout(() => {
+            setCards(prevCards =>
+                prevCards.map(card => ({ ...card, isFlipped: true }))
+            );
+            setIsPreviewing(false);
+            }, timeMs);
+
+            return () => {
+            clearInterval(countdownInterval);
+            clearTimeout(previewTimer);
+            };
+        }
+    }, [isPreviewing]);
+
     // Shuffle deck
     const shuffleDeck = (deck) => deck.sort(() => Math.random() - 0.5);
 
@@ -74,6 +114,7 @@ function MemoryGame() {
         setScore(0);
         setMatches(0);
         setGameOver(false);
+        setGameWon(false);
         setSeconds(0);
         setIsPreviewing(true);
     }, [difficulty]);
@@ -134,15 +175,22 @@ function MemoryGame() {
                 setCards([...newCards]);
                 setFlippedIndices([]);
                 setScore(score - 10);
+                setLives(prev => prev-1);
                 }, 1000);
             }
         }
     };
 
+    useEffect(() => {
+        if (lives <= 0) {
+            setGameOver(true);
+        }
+    }, [lives]);
+
     // Detect game over (all pairs matched)
     useEffect(() => {
         if (matches === getPairCount()) {
-        setGameOver(true);
+        setGameWon(true);
 
         }
     }, [matches]);
@@ -155,6 +203,7 @@ function MemoryGame() {
             isFlipped: false,
             isMatched: false,
         }));
+        setLives(mistakes);
         setCards(shuffleDeck(previewCards));
         setFlippedIndices([]);
         setScore(0);
@@ -169,12 +218,19 @@ function MemoryGame() {
         <Navbar bg="dark" variant="dark" className="game-navbar">
             <Container className="d-flex justify-content-between align-items-center">
             <div className="navbar-item">🧠 Score: {score}</div>
+            <div className="navbar-item">❤️ Lives: {lives}</div>
             <div className="navbar-item">⏱️ Time: {formatTime(seconds)}</div>
             <Button variant="outline-light" onClick={() => navigate('/')}>
                 Return Home
             </Button>
             </Container>
         </Navbar>
+
+            {isPreviewing && (
+                <div className="preview-countdown">
+                🔍 Preview ends in: {previewCountdown}s
+                </div>
+            )}
 
         <div className={`game-grid ${difficulty}`}>
             {cards.map((card, index) => (
@@ -192,6 +248,11 @@ function MemoryGame() {
         <GameOverModal
             show={gameOver}
             onRestart={restartGame}
+        />
+
+        <GameWonModal
+            show={gameWon}
+            onRestart={restartGame}    
         />
         </div>
     );
