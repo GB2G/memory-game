@@ -24,13 +24,21 @@ function GameSelectModal(props) {
     <Modal {...props} size="lg" aria-labelledby="contained-modal-title-vcenter" centered dialogClassName="modal-centered"
         show={show} onHide={onHide}
     >
-        <Modal.Header closeButton>
+        <Modal.Header closeButton
+        style={{
+            backgroundColor: "#0F4628"
+        }}>
             <Modal.Title id="contained-modal-title-vcenter" className="modal-title-centered">
-                <h2>Select a Difficulty to Begin</h2>
+                <h2 style={{
+                    color:"#EFBE47"
+                }}>Select a Difficulty to Begin</h2>
             </Modal.Title>
         </Modal.Header>
 
-        <Modal.Body>
+        <Modal.Body 
+        style={{
+            backgroundColor: "#0F4628"
+        }}>
             <Container className="difficultyCaroussel">
                 <Carousel activeIndex={index} onSelect={handleSelect} interval={null} fade data-bs-ride={true} data-bs-interval="false" indicators={true}>
                     <Carousel.Item>
@@ -39,9 +47,10 @@ function GameSelectModal(props) {
                                 <Card.Img variant="top" src={easyModeImg} />
 
                                 <Card.Body>
-                                    <Card.Title>Easy Mode</Card.Title>
+                                    <Card.Title>🟢 Easy Mode 🟢</Card.Title>
                                     <Card.Text>
-                                        Comprehensive maintenance options ranging from basic adjustments to full overhauls that make your bike good as new.
+                                        <br></br>
+                                        Great for beginners! Match just 2 pairs of cards with unlimited time and generous lives.
                                     </Card.Text>
                                     
                                 </Card.Body>
@@ -58,9 +67,9 @@ function GameSelectModal(props) {
                                 <Card.Img variant="top" src={normalModeImg} />
 
                                 <Card.Body>
-                                    <Card.Title>Normal Mode</Card.Title>
+                                    <Card.Title>🟡 Normal Mode 🟡</Card.Title>
                                     <Card.Text>
-                                        Comprehensive maintenance options ranging from basic adjustments to full overhauls that make your bike good as new.
+                                        A balanced challenge with 4 pairs to match. Fewer lives and a moderate preview time.
                                     </Card.Text>
                                     
                                 </Card.Body>
@@ -77,9 +86,11 @@ function GameSelectModal(props) {
                                 <Card.Img variant="top" src={hardModeImg} />
 
                                 <Card.Body>
-                                    <Card.Title>Hard Mode</Card.Title>
+                                    <Card.Title>🔴 Hard Mode 🔴</Card.Title>
                                     <Card.Text>
-                                        Comprehensive maintenance options ranging from basic adjustments to full overhauls that make your bike good as new.
+                                        <br></br>
+                                        <br></br>
+                                        Only for the sharpest minds. Match 9 pairs with limited lives and a short preview window.
                                     </Card.Text>
                                     
                                 </Card.Body>
@@ -93,7 +104,10 @@ function GameSelectModal(props) {
             </Container>
         </Modal.Body>
 
-        <Modal.Footer>
+        <Modal.Footer
+        style={{
+            backgroundColor: "#0F4628"
+        }}>
             <Button variant="primary" onClick={() => {
                 onHide();
                 navigate(routes[index]);

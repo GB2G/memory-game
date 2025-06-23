@@ -55,13 +55,14 @@ body{
 
 .modal-header .btn-close {
   background: none;
-  color: black;
+  color: #EFBE47;
   font-size: 1.5rem;
   opacity: 1;
+  border-radius: 30px;
 }
 
 .modal-header .btn-close::before {
-  content: "×";          
+  content: "×";
   font-weight: bold;
 }
 
@@ -132,7 +133,7 @@ body{
 }
 
 .carousel-control-prev{
-  background-color: #000;
+  background-color: #EFBE47;
   width: 5vh;
   height: 5vh;
   border-radius: 50%;
@@ -142,7 +143,7 @@ body{
 }
 
 .carousel-control-next {
-  background-color: #000;
+  background-color: #EFBE47;
   width: 5vh;
   height: 5vh;
   border-radius: 50%;
@@ -165,12 +166,12 @@ body{
   height: 12px;
   border-radius: 50%;
   padding: 0;
-  background-color: #ccc;
+  background-color: #EFBE47;
   border: none;
   margin: 0 10px;
   transform: translateY(150%);
 }
 
 .carousel-indicators .active {
-  background-color: #000;
+  background-color: #ccc;
 }

@@ -67,32 +67,21 @@ function MemoryGame() {
 
 
     //Timer to countdown preview
-    const [previewCountdown, setPreviewCountdown] = useState(timeS);
+    const [previewSecondsLeft, setPreviewSecondsLeft] = useState(timeS);
 
     useEffect(() => {
         if (isPreviewing) {
-            setPreviewCountdown(timeS);
-            const countdownInterval = setInterval(() => {
-            setPreviewCountdown(prev => {
-                if (prev <= 1) {
-                clearInterval(countdownInterval);
-                return 0;
-                }
-                return prev - 1;
-            });
+            setPreviewSecondsLeft(timeS); // reset timer to 10 seconds
+            const countdown = setInterval(() => {
+                setPreviewSecondsLeft(prev => {
+                    if (prev <= 1) {
+                        clearInterval(countdown);
+                        return 0;
+                    }
+                    return prev - 1;
+                });
             }, 1000);
-
-            const previewTimer = setTimeout(() => {
-            setCards(prevCards =>
-                prevCards.map(card => ({ ...card, isFlipped: true }))
-            );
-            setIsPreviewing(false);
-            }, timeMs);
-
-            return () => {
-            clearInterval(countdownInterval);
-            clearTimeout(previewTimer);
-            };
+            return () => clearInterval(countdown);
         }
     }, [isPreviewing]);
 
@@ -127,7 +116,7 @@ function MemoryGame() {
             prevCards.map(card => ({ ...card, isFlipped: true }))
             );
             setIsPreviewing(false);
-        }, 5500);
+        }, timeMs);
             return () => clearTimeout(previewTimer);
         }
     }, [isPreviewing]);
@@ -215,7 +204,7 @@ function MemoryGame() {
 
     return (
         <div className="memory-game-wrapper">
-        <Navbar bg="dark" variant="dark" className="game-navbar">
+        <Navbar  variant="dark" className="game-navbar">
             <Container className="d-flex justify-content-between align-items-center">
             <div className="navbar-item">🧠 Score: {score}</div>
             <div className="navbar-item">❤️ Lives: {lives}</div>
@@ -227,8 +216,8 @@ function MemoryGame() {
         </Navbar>
 
             {isPreviewing && (
-                <div className="preview-countdown">
-                🔍 Preview ends in: {previewCountdown}s
+                <div className="preview-timer">
+                    🕒 Preview ends in: {previewSecondsLeft}s
                 </div>
             )}
 

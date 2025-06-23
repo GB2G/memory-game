@@ -1,9 +1,9 @@
 /* MemoryGame.css */
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
-  padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 .game-navbar {
@@ -11,7 +11,7 @@ body {
     left:0;
     position: fixed;
     width:100%;
-    background-color: #343a40;
+    background-color: #0F4628;
     color: white;
     padding: 1rem;
     display: flex;
@@ -19,21 +19,22 @@ body {
     align-items: center;
 }
 
-.preview-countdown {
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 1rem;
-  color: #ffcc00;
+.preview-timer {
+    font-weight: bold;
+    color: #ffcc00;
+    font-size: 1.5rem;
+    text-align: center;
+    margin-top: 4rem;
 }
 
+
 .scoreboard span {
-  margin: 0 1rem;
-  font-weight: bold;
+    margin: 0 1rem;
+    font-weight: bold;
 }
 
 .game-grid {
-    margin: 10vh;
+    margin-top: 5vh;
     display: grid;
     max-width: 20rem;
     align-items: center;
@@ -44,34 +45,35 @@ body {
 
 
 .game-grid.easy {
-  grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
 }
 
 .game-grid.normal {
-  grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr);
 }
 
 .game-grid.hard {
-  grid-template-columns: repeat(6, 12rem);
+    grid-template-columns: repeat(6, 12rem);
 }
 
 .matched {
-  opacity: 0.6;
-  pointer-events: none;
+    opacity: 0.6;
+    pointer-events: none;
 }
 
 
 /* Optional styling for rank and suit */
 .rank {
-  font-size: 1.4rem;
+    font-size: 1.4rem;
 }
 
 .suit {
-  font-size: 2.5rem;
-  margin-top: 5px;
+    font-size: 2.5rem;
+    margin-top: 5px;
 }
 
 /* Modal buttons */
 .modal-footer .btn {
-  min-width: 100px;
+    min-width: 100px;
 }
+
